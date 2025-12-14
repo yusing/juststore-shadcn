@@ -8,7 +8,11 @@ import { StoreFieldContent } from './FieldContent'
 import type { DefaultValue, FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
 
 type CheckboxFieldProps<T extends boolean | undefined, Form = false> = Prettify<
-  StoreFieldPropsCommon<T, Form> & FormComponentProps<typeof Checkbox> & DefaultValue<boolean>
+  StoreFieldPropsCommon<T, Form> &
+    FormComponentProps<typeof Checkbox> &
+    DefaultValue<boolean> & {
+      labelPlacement?: 'left' | 'right'
+    }
 >
 
 function StoreFormCheckboxField<T extends boolean | undefined>(props: CheckboxFieldProps<T, true>) {
@@ -23,20 +27,24 @@ function StoreCheckboxField<T extends boolean | undefined>({
   description,
   descriptionVariant = 'tooltip',
   labelProps,
+  labelPlacement = 'left',
   error,
   ...props
 }: CheckboxFieldProps<T>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
+  const label = (
+    <StoreFieldContent
+      state={state}
+      id={id}
+      title={title}
+      description={description}
+      descriptionVariant={descriptionVariant}
+      {...labelProps}
+    />
+  )
   return (
     <Field orientation="horizontal">
-      <StoreFieldContent
-        state={state}
-        id={id}
-        title={title}
-        description={description}
-        descriptionVariant={descriptionVariant}
-        {...labelProps}
-      />
+      {labelPlacement === 'left' && label}
       <state.Render>
         {(value, update) => (
           <Checkbox
@@ -44,10 +52,12 @@ function StoreCheckboxField<T extends boolean | undefined>({
             defaultChecked={defaultValue}
             checked={Boolean(value)}
             onCheckedChange={checked => update(checked === true ? (true as T) : (undefined as T))}
+            aria-checked={value ? 'true' : 'false'}
             {...props}
           />
         )}
       </state.Render>
+      {labelPlacement === 'right' && label}
       <StoreError error={error} />
     </Field>
   )
