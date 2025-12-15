@@ -43,7 +43,7 @@ function StoreCheckboxField<T extends boolean | undefined>({
     />
   )
   return (
-    <Field orientation="horizontal">
+    <Field orientation="horizontal" className="w-auto shrink-0">
       {labelPlacement === 'left' && label}
       <state.Render>
         {(value, update) => (
