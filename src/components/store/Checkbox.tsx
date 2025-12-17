@@ -16,10 +16,10 @@ type CheckboxFieldProps<T extends boolean | undefined, Form = false> = Prettify<
 >
 
 function StoreFormCheckboxField<T extends boolean | undefined>(props: CheckboxFieldProps<T, true>) {
-  return <StoreCheckboxField {...props} error={props.state.useError} />
+  return <StoreCheckboxField<T, true> {...props} error={props.state.useError} />
 }
 
-function StoreCheckboxField<T extends boolean | undefined>({
+function StoreCheckboxField<T extends boolean | undefined, Form = false>({
   state,
   defaultValue,
   id,
@@ -30,7 +30,7 @@ function StoreCheckboxField<T extends boolean | undefined>({
   labelPlacement = 'left',
   error,
   ...props
-}: CheckboxFieldProps<T>) {
+}: CheckboxFieldProps<T, Form>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
   const label = (
     <StoreFieldContent

@@ -24,10 +24,10 @@ type RadioFieldProps<T, Form = false> = Prettify<
 >
 
 function StoreFormRadioField<T extends Stringable>(props: RadioFieldProps<T, true>) {
-  return <StoreRadioField {...props} error={props.state.useError} />
+  return <StoreRadioField<T, true> {...props} error={props.state.useError} />
 }
 
-function StoreRadioField<T extends Stringable>({
+function StoreRadioField<T extends Stringable, Form = false>({
   state,
   id,
   title,
@@ -40,7 +40,7 @@ function StoreRadioField<T extends Stringable>({
   orientation = 'horizontal',
   className,
   ...props
-}: RadioFieldProps<T>) {
+}: RadioFieldProps<T, Form>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
 
   const [value, setValue] = state.useState()

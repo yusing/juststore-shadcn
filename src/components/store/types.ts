@@ -72,7 +72,7 @@ type StoreFieldPropsCommon<T, Form = false> = {
    * @default undefined
    * @default state.error // form state only
    */
-  error?: Form extends true ? never : () => string | undefined
+  error?: () => string | undefined
 }
 
 export type {

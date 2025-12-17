@@ -1,16 +1,15 @@
 'use client'
 
 import { capitalCase } from 'change-case'
-import type { State } from 'juststore'
 import { useMemo } from 'react'
 import type { Option, Options, Stringable } from './types'
 
-function useIdTitle<T>({
+function useIdTitle({
   state,
   id,
   title
 }: {
-  state: State<T> | State<T | undefined>
+  state: { readonly field: string }
   id?: string
   title?: string
 }) {

@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "change-case": "^5.4.4",
-    "juststore": "^0.1.4"
+    "juststore": "0.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
@@ -60,15 +60,15 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.7",
-    "@typescript-eslint/eslint-plugin": "^8.49.0",
-    "@typescript-eslint/parser": "^8.49.0",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
+    "@typescript-eslint/parser": "^8.50.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint": "^9.39.2",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-react-refresh": "^0.4.26",
     "husky": "^9.1.7",
     "lucide-react": "^0.556.0",
     "prettier": "^3.7.4",

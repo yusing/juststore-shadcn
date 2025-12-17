@@ -29,10 +29,10 @@ type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
 >
 
 function StoreFormSelectField<T extends Stringable>(props: SelectFieldProps<T, true>) {
-  return <StoreSelectField {...props} error={props.state.useError} />
+  return <StoreSelectField<T, true> {...props} error={props.state.useError} />
 }
 
-function StoreSelectField<T extends Stringable>({
+function StoreSelectField<T extends Stringable, Form = false>({
   state,
   id,
   title,
@@ -45,7 +45,7 @@ function StoreSelectField<T extends Stringable>({
   orientation = 'vertical',
   placeholder,
   ...props
-}: SelectFieldProps<T>) {
+}: SelectFieldProps<T, Form>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
 
   const [value, setValue] = state.useState()

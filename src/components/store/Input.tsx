@@ -29,7 +29,7 @@ function convertInputValue<T>(value: T | undefined, type: HTMLInputTypeAttribute
   return String(value)
 }
 
-function StoreInputField<T extends Stringable>({
+function StoreInputField<T extends Stringable, Form = false>({
   state,
   id,
   title,
@@ -40,7 +40,7 @@ function StoreInputField<T extends Stringable>({
   error,
   addons = [],
   ...props
-}: InputFieldProps<T>) {
+}: InputFieldProps<T, Form>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
   return (
     <Field orientation={orientation}>

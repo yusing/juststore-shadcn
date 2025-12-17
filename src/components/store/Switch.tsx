@@ -16,10 +16,10 @@ type SwitchFieldProps<T extends boolean | undefined, Form = false> = Prettify<
 >
 
 function StoreFormSwitchField<T extends boolean | undefined>(props: SwitchFieldProps<T, true>) {
-  return <StoreSwitchField {...props} error={props.state.useError} />
+  return <StoreSwitchField<T, true> {...props} error={props.state.useError} />
 }
 
-function StoreSwitchField<T extends boolean | undefined>({
+function StoreSwitchField<T extends boolean | undefined, Form = false>({
   state,
   defaultValue,
   id,
@@ -30,7 +30,7 @@ function StoreSwitchField<T extends boolean | undefined>({
   labelPlacement = 'left',
   error,
   ...props
-}: SwitchFieldProps<T>) {
+}: SwitchFieldProps<T, Form>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
   const label = (
     <StoreFieldContent
@@ -51,7 +51,7 @@ function StoreSwitchField<T extends boolean | undefined>({
             id={fieldId}
             defaultChecked={defaultValue}
             checked={Boolean(value)}
-            onCheckedChange={checked => update(checked === true ? (true as T) : (undefined as T))}
+            onCheckedChange={checked => update(checked as T)}
             {...props}
           />
         )}
