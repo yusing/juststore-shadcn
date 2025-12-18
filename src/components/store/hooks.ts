@@ -18,21 +18,22 @@ function useIdTitle({
   return { fieldId, fieldTitle }
 }
 
-function useResolveMultipleChoices({
+function useResolveMultipleChoices<T extends Stringable>({
   options,
   value,
   defaultValue
 }: {
-  options: Options
+  options: Options<T>
   value: Stringable
   defaultValue?: Stringable
 }) {
-  const resolvedOptions: Readonly<Option[]> = useMemo(
+  const resolvedOptions: Readonly<Option<T>[]> = useMemo(
     () =>
-      options.map(option =>
-        typeof option === 'string'
-          ? { label: capitalCase(option), value: option, icon: undefined } // display_name => Display Name
-          : option
+      options.map(
+        option =>
+          typeof option === 'object'
+            ? option
+            : { label: capitalCase(String(option)), value: option as T, icon: undefined } // display_name => Display Name
       ),
     [options]
   )

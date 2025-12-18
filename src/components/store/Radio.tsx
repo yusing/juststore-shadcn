@@ -16,9 +16,9 @@ import type {
   Stringable
 } from './types'
 
-type RadioFieldProps<T, Form = false> = Prettify<
+type RadioFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & {
-    options: Options
+    options: Options<T>
   } & FormComponentProps<typeof RadioGroup> &
     DefaultValue<T>
 >
@@ -69,7 +69,7 @@ function StoreRadioField<T extends Stringable, Form = false>({
       >
         {resolvedOptions.map(option => (
           <Field key={option.value} orientation="horizontal" className="gap-2">
-            <RadioGroupItem value={option.value} id={`${fieldId}-${option.value}`} />
+            <RadioGroupItem value={String(option.value)} id={`${fieldId}-${option.value}`} />
             {option.icon && <option.icon className="size-4" />}
             <FieldLabel htmlFor={`${fieldId}-${option.value}`} className="font-medium">
               {option.label}

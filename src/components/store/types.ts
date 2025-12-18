@@ -1,16 +1,16 @@
 import type { FieldLabel } from '@/components/ui/field'
-import type { FormState, State } from 'juststore'
+import type { FormValueState, ValueState } from 'juststore'
 import type React from 'react'
 import type { ComponentProps } from 'react'
 
 type Stringable = string | number | undefined
 
-type Option = {
+type Option<T extends Stringable> = {
   label: React.ReactNode
-  value: string
+  value: T
   icon?: React.ExoticComponent<React.ComponentProps<'svg'>>
 }
-type Options = Readonly<string[] | Option[]>
+type Options<T extends Stringable> = Readonly<T[] | Option<T>[]>
 
 type DescriptionVariant = 'inline' | 'tooltip'
 
@@ -42,7 +42,7 @@ type FormComponentProps<
 >
 
 type StoreFieldPropsCommon<T, Form = false> = {
-  state: Form extends true ? FormState<T> : State<T>
+  state: Form extends true ? FormValueState<T> : ValueState<T>
   /** Field id
    * @default state.field
    */

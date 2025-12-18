@@ -23,7 +23,7 @@ import type {
 
 type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & {
-    options: Options
+    options: Options<T>
   } & FormComponentProps<typeof SelectValue> &
     DefaultValue<T>
 >
@@ -71,7 +71,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
         </SelectTrigger>
         <SelectContent>
           {resolvedOptions.map(option => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem key={option.value} value={String(option.value)}>
               {option.icon && <option.icon className="size-4" />}
               <span className="flex-1">{option.label}</span>
             </SelectItem>
