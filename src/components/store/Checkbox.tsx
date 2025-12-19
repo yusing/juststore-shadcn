@@ -51,9 +51,7 @@ function StoreCheckboxField<T extends boolean | undefined, Form = false>({
             id={fieldId}
             defaultChecked={defaultValue}
             checked={Boolean(value)}
-            onCheckedChange={checked =>
-              update((checked === 'indeterminate' ? undefined : checked) as T)
-            }
+            onCheckedChange={checked => update(checked as T)}
             aria-checked={value ? 'true' : 'false'}
             {...props}
           />

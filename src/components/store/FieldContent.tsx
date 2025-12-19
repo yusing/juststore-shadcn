@@ -30,7 +30,7 @@ function StoreFieldContent<T, Form = false>({
         {fieldTitle}
         {descriptionVariant === 'tooltip' && description && (
           <Tooltip>
-            <TooltipTrigger asChild>
+            <TooltipTrigger>
               <Info className="size-4 m-0.5 ml-auto" />
             </TooltipTrigger>
             <TooltipContent>{description}</TooltipContent>
