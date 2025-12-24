@@ -1,7 +1,5 @@
 import type { FieldLabel } from '@/components/ui/field'
 import type { FormValueState, ValueState } from 'juststore'
-import type React from 'react'
-import type { ComponentProps } from 'react'
 
 type Stringable = string | number | undefined
 
@@ -26,7 +24,7 @@ type FormComponentProps<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Component extends keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>
 > = Omit<
-  ComponentProps<Component>,
+  React.ComponentProps<Component>,
   | 'id'
   | 'title'
   | 'description'
