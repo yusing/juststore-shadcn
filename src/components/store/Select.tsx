@@ -67,7 +67,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
       />
       <Select value={stringValue} onValueChange={v => setValue(v as T)}>
         <SelectTrigger id={fieldId} className={props.className}>
-          <SelectValue placeholder={placeholder ?? defaultValue} {...props} />
+          <SelectValue placeholder={placeholder ?? String(defaultValue)} {...props} />
         </SelectTrigger>
         <SelectContent>
           {resolvedOptions.map(option => (
