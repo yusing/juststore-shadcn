@@ -68,10 +68,10 @@ function StoreRadioField<T extends Stringable, Form = false>({
         {...props}
       >
         {resolvedOptions.map(option => (
-          <Field key={option.value} orientation="horizontal" className="gap-2">
+          <Field key={option.value} orientation="horizontal">
             <RadioGroupItem value={String(option.value)} id={`${fieldId}-${option.value}`} />
-            {option.icon && <option.icon className="size-4" />}
             <FieldLabel htmlFor={`${fieldId}-${option.value}`} className="font-medium">
+              {option.icon && <option.icon className="size-4" />}
               {option.label}
             </FieldLabel>
           </Field>
