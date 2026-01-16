@@ -76,7 +76,7 @@ function StoreInputField<T extends Stringable, Form = false>({
 }
 
 type PasswordFieldProps<T extends Stringable, Form = false> = StoreFieldPropsCommon<T, Form> &
-  Omit<ComponentProps<'input'>, 'value' | 'onChange' | 'type'>
+  Omit<ComponentProps<typeof StoreInputField>, 'value' | 'onChange' | 'type'>
 
 function StoreFormPasswordField<T extends Stringable>(props: PasswordFieldProps<T, true>) {
   return <StorePasswordField<T, true> {...props} error={props.state.useError} />

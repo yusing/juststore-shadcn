@@ -86,7 +86,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
   )
 }
 
-function placeholderValue(placeholder: string | undefined, defaultValue: Stringable) {
+function placeholderValue(placeholder: React.ReactNode | undefined, defaultValue: Stringable) {
   if (placeholder) return placeholder
   if (defaultValue) return String(defaultValue)
   return undefined
