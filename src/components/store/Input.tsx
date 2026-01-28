@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Field, FieldDescription } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
-import { Eye, EyeClosed } from 'lucide-react'
+import { IconEye, IconEyeClosed } from '@tabler/icons-react'
 import { type ComponentProps, type HTMLInputTypeAttribute, useMemo, useState } from 'react'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
@@ -102,7 +102,7 @@ function StorePasswordField<T extends Stringable, Form = false>({
               className="opacity-70 hover:opacity-100 size-8"
               onClick={() => setIsVisible(!isVisible)}
             >
-              {isVisible ? <EyeClosed /> : <Eye />}
+              {isVisible ? <IconEyeClosed /> : <IconEye />}
             </Button>
           )
         }
