@@ -2,7 +2,7 @@
 
 import { FieldLabel } from '@/components/ui/field'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { Info } from 'lucide-react'
+import { IconInfoCircle } from '@tabler/icons-react'
 import { useIdTitle } from './hooks'
 import type { FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
 
@@ -30,7 +30,7 @@ function StoreLabel<T, Form = false>({
       {descriptionVariant === 'tooltip' && description && (
         <Tooltip>
           <TooltipTrigger>
-            <Info className="size-4 m-0.5 ml-auto" />
+            <IconInfoCircle className="size-4 m-0.5 ml-auto" />
           </TooltipTrigger>
           <TooltipContent>{description}</TooltipContent>
         </Tooltip>

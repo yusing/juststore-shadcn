@@ -33,24 +33,25 @@ function useResolveMultipleChoices<T extends Stringable>({
         option =>
           typeof option === 'object'
             ? option
-            : { label: capitalCase(String(option)), value: option as T, icon: undefined } // display_name => Display Name
+            : { label: capitalCase(String(option)), value: option, icon: undefined } // display_name => Display Name
       ),
     [options]
   )
 
   // Ensure the value is one of the allowed values
   const stringValue = useMemo(() => {
-    if (value && !resolvedOptions.some(option => option.value === String(value))) {
+    if (value && !resolvedOptions.some(option => String(option.value) === String(value))) {
       const v = defaultValue ?? resolvedOptions[0]?.value
       if (v === undefined || v === null) {
         return undefined
       }
       return String(v)
     }
-    if (value === undefined || value === null) {
+    const final = value ?? defaultValue ?? resolvedOptions[0]?.value
+    if (final === undefined || final === null) {
       return undefined
     }
-    return String(value)
+    return String(final)
   }, [value, defaultValue, resolvedOptions])
 
   return { resolvedOptions, stringValue }

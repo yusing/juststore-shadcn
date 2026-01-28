@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { cn } from '@/lib/utils'
+import { capitalCase } from 'change-case'
 import { useMemo } from 'react'
 import { StoreError } from './Error'
 import { useResolveMultipleChoices } from './hooks'
@@ -68,14 +68,18 @@ function StoreSelectField<T extends Stringable, Form = false>({
         {...labelProps}
       />
       <Select value={stringValue} onValueChange={v => setValue(v as T)}>
-        <SelectTrigger id={fieldId} className={cn('capitalize', className)}>
+        <SelectTrigger id={fieldId} className={className}>
           <SelectValue placeholder={placeholderValue(placeholder, defaultValue)} {...props} />
         </SelectTrigger>
         <SelectContent>
           {resolvedOptions.map(option => (
             <SelectItem key={option.value} value={String(option.value)}>
               {option.icon && <option.icon className="size-4" />}
-              <span className="flex-1 capitalize">{option.label}</span>
+              <span className="flex-1">
+                {typeof option.label === 'string' || typeof option.label === 'number'
+                  ? capitalCase(String(option.label))
+                  : option.label}
+              </span>
             </SelectItem>
           ))}
         </SelectContent>
