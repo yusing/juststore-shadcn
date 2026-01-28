@@ -68,7 +68,7 @@ function StoreInputField<T extends Stringable, Form = false>({
         ))}
       </InputGroup>
       {descriptionVariant === 'inline' && description && (
-        <FieldDescription>{description}</FieldDescription>
+        <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
       <StoreError error={error} />
     </Field>

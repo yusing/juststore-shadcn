@@ -79,7 +79,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
         </SelectContent>
       </Select>
       {descriptionVariant === 'inline' && description && (
-        <FieldDescription>{description}</FieldDescription>
+        <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
       <StoreError error={error} />
     </Field>
