@@ -66,7 +66,7 @@ function StoreRadioField<T extends Stringable, Form = false>({
 
   return (
     <Field orientation="vertical">
-      <div className={cn('flex flex-col items-start gap-2')}>
+      <div className="flex flex-col items-start gap-2">
         {labelPlacement === 'left' && label}
         <RadioGroup
           className={cn('flex flex-col', className)}

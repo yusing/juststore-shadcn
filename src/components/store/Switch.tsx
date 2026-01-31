@@ -44,7 +44,7 @@ function StoreSwitchField<T extends boolean | undefined, Form = false>({
   )
   return (
     <Field orientation="vertical" className="w-auto shrink-0">
-      <div className="flex flex-col items-start gap-2">
+      <div className="flex items-center gap-2">
         {labelPlacement === 'left' && label}
         <state.Render>
           {(value, update) => (
