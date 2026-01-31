@@ -1,10 +1,10 @@
 'use client'
 
-import { Field } from '@/components/ui/field'
+import { Field, FieldDescription } from '@/components/ui/field'
 import { Switch } from '@/components/ui/switch'
 import { useMemo } from 'react'
 import { StoreError } from './Error'
-import { StoreFieldContent } from './FieldContent'
+import { StoreLabel } from './Label'
 import type { DefaultValue, FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
 
 type SwitchFieldProps<T extends boolean | undefined, Form = false> = Prettify<
@@ -25,7 +25,7 @@ function StoreSwitchField<T extends boolean | undefined, Form = false>({
   id,
   title,
   description,
-  descriptionVariant = 'tooltip',
+  descriptionVariant = 'inline',
   labelProps,
   labelPlacement = 'left',
   error,
@@ -33,7 +33,7 @@ function StoreSwitchField<T extends boolean | undefined, Form = false>({
 }: SwitchFieldProps<T, Form>) {
   const fieldId = useMemo(() => id ?? state.field, [id, state.field])
   const label = (
-    <StoreFieldContent
+    <StoreLabel
       state={state}
       id={id}
       title={title}
@@ -43,20 +43,25 @@ function StoreSwitchField<T extends boolean | undefined, Form = false>({
     />
   )
   return (
-    <Field orientation="horizontal" className="w-auto shrink-0">
-      {labelPlacement === 'left' && label}
-      <state.Render>
-        {(value, update) => (
-          <Switch
-            id={fieldId}
-            defaultChecked={defaultValue}
-            checked={Boolean(value)}
-            onCheckedChange={checked => update(checked as T)}
-            {...props}
-          />
-        )}
-      </state.Render>
-      {labelPlacement === 'right' && label}
+    <Field orientation="vertical" className="w-auto shrink-0">
+      <div className="flex items-center gap-2">
+        {labelPlacement === 'left' && label}
+        <state.Render>
+          {(value, update) => (
+            <Switch
+              id={fieldId}
+              defaultChecked={defaultValue}
+              checked={Boolean(value)}
+              onCheckedChange={checked => update(checked as T)}
+              {...props}
+            />
+          )}
+        </state.Render>
+        {labelPlacement === 'right' && label}
+      </div>
+      {descriptionVariant === 'inline' && description && (
+        <FieldDescription className="text-xs">{description}</FieldDescription>
+      )}
       <StoreError error={error} />
     </Field>
   )

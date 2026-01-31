@@ -1,12 +1,12 @@
 'use client'
 
-import { Field, FieldLabel } from '@/components/ui/field'
+import { Field, FieldDescription, FieldLabel } from '@/components/ui/field'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
 import { useMemo } from 'react'
 import { StoreError } from './Error'
-import { StoreFieldContent } from './FieldContent'
 import { useResolveMultipleChoices } from './hooks'
+import { StoreLabel } from './Label'
 import type {
   DefaultValue,
   FormComponentProps,
@@ -17,10 +17,12 @@ import type {
 } from './types'
 
 type RadioFieldProps<T extends Stringable, Form = false> = Prettify<
-  StoreFieldPropsCommon<T, Form> & {
-    options: Options<T>
-  } & FormComponentProps<typeof RadioGroup> &
-    DefaultValue<T>
+  StoreFieldPropsCommon<T, Form> &
+    FormComponentProps<typeof RadioGroup> &
+    DefaultValue<T> & {
+      options: Options<T>
+      labelPlacement?: 'left' | 'right'
+    }
 >
 
 function StoreFormRadioField<T extends Stringable>(props: RadioFieldProps<T, true>) {
@@ -32,12 +34,13 @@ function StoreRadioField<T extends Stringable, Form = false>({
   id,
   title,
   description,
-  descriptionVariant = 'tooltip',
-  labelProps,
+  descriptionVariant = 'inline',
   error,
   options,
   defaultValue,
   orientation = 'horizontal',
+  labelProps,
+  labelPlacement = 'left',
   className,
   ...props
 }: RadioFieldProps<T, Form>) {
@@ -51,32 +54,42 @@ function StoreRadioField<T extends Stringable, Form = false>({
     defaultValue
   })
 
+  const label = (
+    <StoreLabel
+      state={state}
+      id={id}
+      title={title}
+      description={description}
+      descriptionVariant={descriptionVariant}
+      {...labelProps}
+    />
+  )
+
   return (
-    <Field orientation={orientation}>
-      <StoreFieldContent
-        state={state}
-        id={id}
-        title={title}
-        description={description}
-        descriptionVariant={descriptionVariant}
-        {...labelProps}
-      />
-      <RadioGroup
-        className={cn('flex', orientation === 'horizontal' ? 'flex-row' : 'flex-col', className)}
-        value={stringValue}
-        onValueChange={v => setValue(v as T)}
-        {...props}
-      >
-        {resolvedOptions.map(option => (
-          <Field key={option.value} orientation="horizontal">
-            <RadioGroupItem value={String(option.value)} id={`${fieldId}-${option.value}`} />
-            <FieldLabel htmlFor={`${fieldId}-${option.value}`} className="font-medium">
-              {option.icon && <option.icon className="size-4" />}
-              {option.label}
-            </FieldLabel>
-          </Field>
-        ))}
-      </RadioGroup>
+    <Field orientation="vertical">
+      <div className="flex items-center gap-2">
+        {labelPlacement === 'left' && label}
+        <RadioGroup
+          className={cn('flex', orientation === 'horizontal' ? 'flex-row' : 'flex-col', className)}
+          value={stringValue}
+          onValueChange={v => setValue(v as T)}
+          {...props}
+        >
+          {resolvedOptions.map(option => (
+            <Field key={option.value} orientation="horizontal">
+              <RadioGroupItem value={String(option.value)} id={`${fieldId}-${option.value}`} />
+              <FieldLabel htmlFor={`${fieldId}-${option.value}`} className="font-medium">
+                {option.icon && <option.icon className="size-4" />}
+                {option.label}
+              </FieldLabel>
+            </Field>
+          ))}
+        </RadioGroup>
+        {labelPlacement === 'right' && label}
+      </div>
+      {descriptionVariant === 'inline' && description && (
+        <FieldDescription className="text-xs">{description}</FieldDescription>
+      )}
       <StoreError error={error} />
     </Field>
   )
