@@ -71,7 +71,6 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
     }
     const indexes = newValue.map(v => stringOptions.findIndex(sv => sv === v))
     const changed = indexes.map(i => resolvedOptions[i]!.value)
-    console.log('changed', changed)
     state.set(changed)
   }
 
