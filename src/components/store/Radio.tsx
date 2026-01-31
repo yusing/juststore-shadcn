@@ -17,7 +17,7 @@ import type {
 } from './types'
 
 type RadioFieldProps<T extends Stringable, Form = false> = Prettify<
-  StoreFieldPropsCommon<T, Form> &
+  Omit<StoreFieldPropsCommon<T, Form>, 'orientation'> &
     FormComponentProps<typeof RadioGroup> &
     DefaultValue<T> & {
       options: Options<T>
@@ -38,7 +38,6 @@ function StoreRadioField<T extends Stringable, Form = false>({
   error,
   options,
   defaultValue,
-  orientation = 'horizontal',
   labelProps,
   labelPlacement = 'left',
   className,
@@ -67,10 +66,10 @@ function StoreRadioField<T extends Stringable, Form = false>({
 
   return (
     <Field orientation="vertical">
-      <div className="flex items-center gap-2">
+      <div className={cn('flex flex-col items-start gap-2')}>
         {labelPlacement === 'left' && label}
         <RadioGroup
-          className={cn('flex', orientation === 'horizontal' ? 'flex-row' : 'flex-col', className)}
+          className={cn('flex flex-col', className)}
           value={stringValue}
           onValueChange={v => setValue(v as T)}
           {...props}
