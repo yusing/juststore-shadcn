@@ -38,7 +38,7 @@ function StoreFieldContent<T, Form = false>({
         )}
       </FieldLabel>
       {descriptionVariant === 'inline' && description && (
-        <FieldDescription>{description}</FieldDescription>
+        <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
     </FieldContent>
   )
