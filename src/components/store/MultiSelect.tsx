@@ -62,7 +62,9 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
     [options]
   )
 
-  const stringValues = state.useCompute(value => (value ? value.map(v => String(v)) : []))
+  const stringValues = state.useCompute(value =>
+    value ? value.map(v => String(v)) : (defaultValue?.map(v => String(v)) ?? [])
+  )
   const stringOptions = useMemo(() => resolvedOptions.map(o => String(o.value)), [resolvedOptions])
 
   const handleValueChange = (newValue: string[]) => {
