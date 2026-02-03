@@ -25,6 +25,7 @@
     "store"
   ],
   "scripts": {
+    "build": "bun run tsc",
     "typecheck": "bun run tsc --noEmit",
     "lint": "bun run eslint src/store/**",
     "format": "bun run prettier --write src/store/**",
