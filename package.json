@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "change-case": "^5.4.4",
-    "juststore": "^0.4.1"
+    "juststore": "^0.4.3"
   },
   "devDependencies": {
     "@base-ui/react": "^1.1.0",

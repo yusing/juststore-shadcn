@@ -6,7 +6,7 @@
       "name": "juststore",
       "dependencies": {
         "change-case": "^5.4.4",
-        "juststore": "^0.4.1",
+        "juststore": "^0.4.3",
       },
       "devDependencies": {
         "@base-ui/react": "^1.1.0",
@@ -424,7 +424,7 @@
 
     "jsx-ast-utils": ["jsx-ast-utils@3.3.5", "", { "dependencies": { "array-includes": "^3.1.6", "array.prototype.flat": "^1.3.1", "object.assign": "^4.1.4", "object.values": "^1.1.6" } }, "sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ=="],
 
-    "juststore": ["juststore@0.4.1", "", { "dependencies": { "change-case": "^5.4.4", "react-fast-compare": "^3.2.2" }, "peerDependencies": { "react": ">=18.0.0" } }, "sha512-PesQzCVgEdUFWKhRUcNL27q2Az1woWuQGF79ebgsRtyoYgua9MoaUaAgBi68Rx2JQPG33jR153T9lIbS7CGnjw=="],
+    "juststore": ["juststore@0.4.3", "", { "dependencies": { "change-case": "^5.4.4", "react-fast-compare": "^3.2.2" }, "peerDependencies": { "react": ">=18.0.0" } }, "sha512-FTNCJ/LK3TT0Ih/OHGLvqjAXoywc401E4b4V2mjFGg2iXDrJBv29FQ8+NbxBfpOQN7wDqoGkzjNn6za8OlGo6w=="],
 
     "keyv": ["keyv@4.5.4", "", { "dependencies": { "json-buffer": "3.0.1" } }, "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw=="],
 
