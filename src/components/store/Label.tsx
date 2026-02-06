@@ -1,9 +1,9 @@
 'use client'
 
+import { IconInfoCircle } from '@tabler/icons-react'
 import { FieldLabel } from '@/components/ui/field'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { IconInfoCircle } from '@tabler/icons-react'
 import { useIdTitle } from './hooks'
 import type { FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
 

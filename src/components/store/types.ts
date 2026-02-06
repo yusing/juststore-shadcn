@@ -1,5 +1,6 @@
-import type { FieldLabel } from '@/components/ui/field'
+/** biome-ignore-all lint/suspicious/noExplicitAny: <intended> */
 import type { FormValueState, ValueState } from 'juststore'
+import type { FieldLabel } from '@/components/ui/field'
 
 type Stringable = string | number | undefined
 
@@ -21,8 +22,7 @@ type AnyStringCompatible = string | number | undefined
 type AnyBooleanCompatible = boolean | undefined
 
 type FormComponentProps<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Component extends keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>
+  Component extends keyof React.JSX.IntrinsicElements | React.JSXElementConstructor<any>,
 > = Omit<
   React.ComponentProps<Component>,
   | 'id'
@@ -80,7 +80,7 @@ export type {
   Option,
   Options,
   Prettify,
-  StoreFieldPropsCommon
+  StoreFieldPropsCommon,
 }
 
 export type { AnyBooleanCompatible, AnyStringCompatible, Stringable }

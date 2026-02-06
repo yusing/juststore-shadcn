@@ -1,5 +1,7 @@
 'use client'
 
+import { capitalCase } from 'change-case'
+import { useMemo } from 'react'
 import {
   Combobox,
   ComboboxChip,
@@ -9,11 +11,9 @@ import {
   ComboboxEmpty,
   ComboboxItem,
   ComboboxList,
-  ComboboxValue
+  ComboboxValue,
 } from '@/components/ui/combobox'
 import { Field, FieldDescription } from '@/components/ui/field'
-import { capitalCase } from 'change-case'
-import { useMemo } from 'react'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
 import type {
@@ -23,7 +23,7 @@ import type {
   Options,
   Prettify,
   StoreFieldPropsCommon,
-  Stringable
+  Stringable,
 } from './types'
 
 type MultiSelectFieldProps<T extends Stringable, Form = false> = Prettify<

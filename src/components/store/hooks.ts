@@ -7,7 +7,7 @@ import type { Option, Options, Stringable } from './types'
 function useIdTitle({
   state,
   id,
-  title
+  title,
 }: {
   state: { readonly field: string }
   id?: string
@@ -21,7 +21,7 @@ function useIdTitle({
 function useResolveMultipleChoices<T extends Stringable>({
   options,
   value,
-  defaultValue
+  defaultValue,
 }: {
   options: Options<T>
   value: Stringable

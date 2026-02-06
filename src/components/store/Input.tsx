@@ -1,10 +1,10 @@
 'use client'
 
+import { IconEye, IconEyeClosed } from '@tabler/icons-react'
+import { type ComponentProps, type HTMLInputTypeAttribute, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Field, FieldDescription } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
-import { IconEye, IconEyeClosed } from '@tabler/icons-react'
-import { type ComponentProps, type HTMLInputTypeAttribute, useMemo, useState } from 'react'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
 import type { FormComponentProps, Prettify, StoreFieldPropsCommon, Stringable } from './types'
@@ -23,7 +23,7 @@ function convertInputValue<T>(value: T | undefined, type: HTMLInputTypeAttribute
   if (!value) return undefined
   if (type === 'number') {
     const n = Number(value)
-    if (isNaN(n)) return undefined
+    if (Number.isNaN(n)) return undefined
     return n
   }
   return String(value)
@@ -104,8 +104,8 @@ function StorePasswordField<T extends Stringable, Form = false>({
             >
               {isVisible ? <IconEyeClosed /> : <IconEye />}
             </Button>
-          )
-        }
+          ),
+        },
       ]}
     />
   )

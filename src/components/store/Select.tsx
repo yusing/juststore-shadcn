@@ -1,15 +1,15 @@
 'use client'
 
+import { capitalCase } from 'change-case'
+import { useMemo } from 'react'
 import { Field, FieldDescription } from '@/components/ui/field'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select'
-import { capitalCase } from 'change-case'
-import { useMemo } from 'react'
 import { StoreError } from './Error'
 import { useResolveMultipleChoices } from './hooks'
 import { StoreLabel } from './Label'
@@ -19,7 +19,7 @@ import type {
   Options,
   Prettify,
   StoreFieldPropsCommon,
-  Stringable
+  Stringable,
 } from './types'
 
 type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
@@ -54,7 +54,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
   const { resolvedOptions, stringValue } = useResolveMultipleChoices({
     options,
     value,
-    defaultValue
+    defaultValue,
   })
 
   return (

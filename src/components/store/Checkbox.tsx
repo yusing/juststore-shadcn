@@ -1,8 +1,8 @@
 'use client'
 
+import { useMemo } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldDescription } from '@/components/ui/field'
-import { useMemo } from 'react'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
 import type { DefaultValue, FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
@@ -26,6 +26,7 @@ function StoreCheckboxField<T extends boolean | undefined, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   labelProps,
   labelPlacement = 'left',
   error,
@@ -39,6 +40,7 @@ function StoreCheckboxField<T extends boolean | undefined, Form = false>({
       title={title}
       description={description}
       descriptionVariant={descriptionVariant}
+      required={required}
       {...labelProps}
     />
   )

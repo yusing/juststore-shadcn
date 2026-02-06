@@ -1,9 +1,9 @@
 'use client'
 
+import { useMemo } from 'react'
 import { Field, FieldDescription, FieldLabel } from '@/components/ui/field'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
-import { useMemo } from 'react'
 import { StoreError } from './Error'
 import { useResolveMultipleChoices } from './hooks'
 import { StoreLabel } from './Label'
@@ -13,7 +13,7 @@ import type {
   Options,
   Prettify,
   StoreFieldPropsCommon,
-  Stringable
+  Stringable,
 } from './types'
 
 type RadioFieldProps<T extends Stringable, Form = false> = Prettify<
@@ -50,7 +50,7 @@ function StoreRadioField<T extends Stringable, Form = false>({
   const { resolvedOptions, stringValue } = useResolveMultipleChoices({
     options,
     value,
-    defaultValue
+    defaultValue,
   })
 
   const label = (
