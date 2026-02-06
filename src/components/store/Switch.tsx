@@ -26,6 +26,7 @@ function StoreSwitchField<T extends boolean | undefined, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   labelProps,
   labelPlacement = 'left',
   error,
@@ -39,6 +40,7 @@ function StoreSwitchField<T extends boolean | undefined, Form = false>({
       title={title}
       description={description}
       descriptionVariant={descriptionVariant}
+      required={required}
       {...labelProps}
     />
   )

@@ -57,6 +57,10 @@ type StoreFieldPropsCommon<T, Form = false> = {
    * @default 'inline'
    */
   descriptionVariant?: DescriptionVariant
+  /** Required field
+   * @default false
+   */
+  required?: boolean
   /** Field orientation
    * @default 'vertical'
    * @default 'horizontal' // checkbox and radio only

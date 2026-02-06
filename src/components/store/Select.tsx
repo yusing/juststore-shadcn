@@ -39,6 +39,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   labelProps,
   error,
   options,
@@ -65,6 +66,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
         title={title}
         description={description}
         descriptionVariant={descriptionVariant}
+        required={required}
         {...labelProps}
       />
       <Select value={stringValue} onValueChange={v => setValue(v as T)}>

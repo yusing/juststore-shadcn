@@ -10,7 +10,7 @@ import type { FormComponentProps, Prettify, StoreFieldPropsCommon } from './type
 type LabelProps<T, Form = false> = Prettify<
   Pick<
     StoreFieldPropsCommon<T, Form>,
-    'state' | 'id' | 'title' | 'description' | 'descriptionVariant'
+    'state' | 'id' | 'title' | 'description' | 'descriptionVariant' | 'required'
   > &
     FormComponentProps<typeof FieldLabel>
 >
@@ -22,6 +22,7 @@ function StoreLabel<T, Form = false>({
   description,
   descriptionVariant = 'inline',
   className,
+  required,
   ...labelProps
 }: LabelProps<T, Form>) {
   const { fieldId, fieldTitle } = useIdTitle({ state, id, title })
@@ -32,7 +33,10 @@ function StoreLabel<T, Form = false>({
       className={cn('flex justify-between gap-2', className)}
       {...labelProps}
     >
-      {fieldTitle}
+      <span className="flex items-center gap-1">
+        {fieldTitle}
+        {required && <span className="text-red-500">*</span>}
+      </span>
       {descriptionVariant === 'tooltip' && description && (
         <Tooltip>
           <TooltipTrigger>

@@ -20,6 +20,7 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   orientation = 'vertical',
   labelProps,
   error,
@@ -33,6 +34,7 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
         title={title}
         description={description}
         descriptionVariant={descriptionVariant}
+        required={required}
         {...labelProps}
       />
       <state.Render>

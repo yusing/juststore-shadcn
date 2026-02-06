@@ -35,6 +35,7 @@ function StoreRadioField<T extends Stringable, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   error,
   options,
   defaultValue,
@@ -60,6 +61,7 @@ function StoreRadioField<T extends Stringable, Form = false>({
       title={title}
       description={description}
       descriptionVariant={descriptionVariant}
+      required={required}
       {...labelProps}
     />
   )

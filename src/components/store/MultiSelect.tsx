@@ -43,6 +43,7 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   labelProps,
   error,
   options,
@@ -84,6 +85,7 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
         title={title}
         description={description}
         descriptionVariant={descriptionVariant}
+        required={required}
         {...labelProps}
       />
       <Combobox

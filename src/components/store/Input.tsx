@@ -35,6 +35,7 @@ function StoreInputField<T extends Stringable, Form = false>({
   title,
   description,
   descriptionVariant = 'inline',
+  required = false,
   orientation = 'vertical',
   labelProps,
   error,
@@ -50,6 +51,7 @@ function StoreInputField<T extends Stringable, Form = false>({
         title={title}
         description={description}
         descriptionVariant={descriptionVariant}
+        required={required}
         {...labelProps}
       />
       <InputGroup>
@@ -117,5 +119,5 @@ export {
   StoreInputField,
   StorePasswordField,
   type InputFieldProps,
-  type PasswordFieldProps
+  type PasswordFieldProps,
 }
