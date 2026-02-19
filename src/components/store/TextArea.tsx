@@ -1,5 +1,6 @@
 'use client'
 
+import { RenderWithUpdate } from 'juststore'
 import { Field, FieldDescription } from '@/components/ui/field'
 import { Textarea } from '@/components/ui/textarea'
 import { StoreError } from './Error'
@@ -37,7 +38,7 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
         required={required}
         {...labelProps}
       />
-      <state.Render>
+      <RenderWithUpdate state={state}>
         {(value, update) => (
           <Textarea
             id={id ?? state.field}
@@ -46,7 +47,7 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
             {...props}
           />
         )}
-      </state.Render>
+      </RenderWithUpdate>
       {descriptionVariant === 'inline' && description && (
         <FieldDescription className="text-xs">{description}</FieldDescription>
       )}

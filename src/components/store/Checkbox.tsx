@@ -1,5 +1,6 @@
 'use client'
 
+import { RenderWithUpdate } from 'juststore'
 import { useMemo } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldDescription } from '@/components/ui/field'
@@ -48,7 +49,7 @@ function StoreCheckboxField<T extends boolean | undefined, Form = false>({
     <Field orientation="vertical" className="w-auto shrink-0">
       <div className="flex items-center gap-2">
         {labelPlacement === 'left' && label}
-        <state.Render>
+        <RenderWithUpdate state={state}>
           {(value, update) => (
             <Checkbox
               id={fieldId}
@@ -59,7 +60,7 @@ function StoreCheckboxField<T extends boolean | undefined, Form = false>({
               {...props}
             />
           )}
-        </state.Render>
+        </RenderWithUpdate>
         {labelPlacement === 'right' && label}
       </div>
       {descriptionVariant === 'inline' && description && (

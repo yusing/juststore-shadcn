@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "change-case": "^5.4.4",
-    "juststore": "^0.4.4"
+    "juststore": "1.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.2",

@@ -1,6 +1,7 @@
 'use client'
 
 import { IconEye, IconEyeClosed } from '@tabler/icons-react'
+import { RenderWithUpdate } from 'juststore'
 import { type ComponentProps, type HTMLInputTypeAttribute, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Field, FieldDescription } from '@/components/ui/field'
@@ -55,7 +56,7 @@ function StoreInputField<T extends Stringable, Form = false>({
         {...labelProps}
       />
       <InputGroup>
-        <state.Render>
+        <RenderWithUpdate state={state}>
           {(value, update) => (
             <InputGroupInput
               id={fieldId}
@@ -64,7 +65,7 @@ function StoreInputField<T extends Stringable, Form = false>({
               {...props}
             />
           )}
-        </state.Render>
+        </RenderWithUpdate>
         {addons.map((props, index) => (
           <InputGroupAddon key={index} {...props} />
         ))}

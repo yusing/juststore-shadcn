@@ -6,7 +6,7 @@
       "name": "juststore",
       "dependencies": {
         "change-case": "^5.4.4",
-        "juststore": "^0.4.4",
+        "juststore": "1.0.1",
       },
       "devDependencies": {
         "@base-ui/react": "^1.2.0",
@@ -79,7 +79,7 @@
 
     "husky": ["husky@9.1.7", "", { "bin": { "husky": "bin.js" } }, "sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA=="],
 
-    "juststore": ["juststore@0.4.4", "", { "dependencies": { "change-case": "^5.4.4", "react-fast-compare": "^3.2.2" }, "peerDependencies": { "react": ">=18.0.0" } }, "sha512-N+bdVEmnMf+XXKAeUySHttpPka4/tg+XlzurkNhwsw4vKA928l93lA7HsC/BfPdHujYnbLXpPeZr0UhevyfbRQ=="],
+    "juststore": ["juststore@1.0.1", "", { "dependencies": { "change-case": "^5.4.4", "react-fast-compare": "^3.2.2" }, "peerDependencies": { "react": ">=18.0.0" } }, "sha512-KbwQ0NLrgtnhhFGE0HU+R6QPxkOo0jzzIa0w4pwCsupdlHhg4ge4T1wZNotBU8wywJC2fkKLVi7uOnhbGS0jdA=="],
 
     "react": ["react@19.2.4", "", {}, "sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ=="],
 
