@@ -26,7 +26,9 @@ type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & {
     options: Options<T>
   } & FormComponentProps<typeof SelectValue> &
-    DefaultValue<T>
+    DefaultValue<T> & {
+      captializeSelectItems?: boolean
+    }
 >
 
 function StoreFormSelectField<T extends Stringable>(props: SelectFieldProps<T, true>) {
@@ -46,6 +48,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
   defaultValue,
   orientation = 'vertical',
   placeholder,
+  captializeSelectItems = true,
   className,
   ...props
 }: SelectFieldProps<T, Form>) {
@@ -78,7 +81,8 @@ function StoreSelectField<T extends Stringable, Form = false>({
             <SelectItem key={option.value} value={String(option.value)}>
               {option.icon && <option.icon className="size-4" />}
               <span className="flex-1">
-                {typeof option.label === 'string' || typeof option.label === 'number'
+                {captializeSelectItems &&
+                (typeof option.label === 'string' || typeof option.label === 'number')
                   ? capitalCase(String(option.label))
                   : option.label}
               </span>
