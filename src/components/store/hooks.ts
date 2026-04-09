@@ -33,7 +33,11 @@ function useResolveMultipleChoices<T extends Stringable>({
         option =>
           typeof option === 'object'
             ? option
-            : { label: capitalCase(String(option)), value: option, icon: undefined } // display_name => Display Name
+            : {
+                label: option == null ? 'None' : capitalCase(String(option)),
+                value: option,
+                icon: undefined,
+              } // display_name => Display Name
       ),
     [options]
   )

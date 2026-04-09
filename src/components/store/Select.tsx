@@ -27,7 +27,7 @@ type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
     options: Options<T>
   } & FormComponentProps<typeof SelectValue> &
     DefaultValue<T> & {
-      captializeSelectItems?: boolean
+      capitalizeSelectItems?: boolean
     }
 >
 
@@ -48,7 +48,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
   defaultValue,
   orientation = 'vertical',
   placeholder,
-  captializeSelectItems = true,
+  capitalizeSelectItems = true,
   className,
   ...props
 }: SelectFieldProps<T, Form>) {
@@ -78,10 +78,13 @@ function StoreSelectField<T extends Stringable, Form = false>({
         </SelectTrigger>
         <SelectContent>
           {resolvedOptions.map(option => (
-            <SelectItem key={option.value} value={String(option.value)}>
+            <SelectItem
+              key={option.value}
+              value={option.value == null ? option.value : String(option.value)}
+            >
               {option.icon && <option.icon className="size-4" />}
               <span className="flex-1">
-                {captializeSelectItems &&
+                {capitalizeSelectItems &&
                 (typeof option.label === 'string' || typeof option.label === 'number')
                   ? capitalCase(String(option.label))
                   : option.label}
