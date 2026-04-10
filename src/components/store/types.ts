@@ -6,10 +6,10 @@ type Stringable = string | number | undefined
 
 type Option<T extends Stringable> = {
   label: React.ReactNode
-  value: T
+  value: T | undefined
   icon?: React.ExoticComponent<React.ComponentProps<'svg'>>
 }
-type Options<T extends Stringable> = Readonly<T[] | Option<T>[]>
+type Options<T extends Stringable> = Readonly<T[] | (T | undefined)[] | Option<T>[]>
 
 type DescriptionVariant = 'inline' | 'tooltip'
 
