@@ -18,28 +18,37 @@ function useIdTitle({
   return { fieldId, fieldTitle }
 }
 
+function resolvePrimitiveOption<T extends Stringable>(
+  primitive: T | undefined,
+  capitalizePrimitiveOptions: boolean
+): Option<T> {
+  if (primitive == null) {
+    return { label: 'None', value: primitive, icon: undefined }
+  }
+  const label = capitalizePrimitiveOptions ? capitalCase(String(primitive)) : String(primitive)
+  return { label, value: primitive, icon: undefined }
+}
+
 function useResolveMultipleChoices<T extends Stringable>({
   options,
   value,
   defaultValue,
+  /** When false, primitive option values keep raw string labels (no title-casing). */
+  capitalizePrimitiveOptions = true,
 }: {
   options: Options<T>
   value: Stringable
   defaultValue?: Stringable
+  capitalizePrimitiveOptions?: boolean
 }) {
   const resolvedOptions: Readonly<Option<T>[]> = useMemo(
     () =>
-      options.map(
-        option =>
-          typeof option === 'object'
-            ? option
-            : {
-                label: option == null ? 'None' : capitalCase(String(option)),
-                value: option,
-                icon: undefined,
-              } // display_name => Display Name
+      options.map(option =>
+        typeof option === 'object'
+          ? option
+          : resolvePrimitiveOption(option, capitalizePrimitiveOptions)
       ),
-    [options]
+    [options, capitalizePrimitiveOptions]
   )
 
   // Ensure the value is one of the allowed values

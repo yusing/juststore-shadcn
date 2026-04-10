@@ -59,6 +59,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
     options,
     value,
     defaultValue,
+    capitalizePrimitiveOptions: capitalizeSelectItems,
   })
 
   return (
