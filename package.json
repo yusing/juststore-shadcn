@@ -2,57 +2,57 @@
   "name": "juststore-shadcn",
   "version": "0.0.1",
   "description": "Shadcn UI components for juststore.",
-  "type": "module",
+  "keywords": [
+    "hooks",
+    "juststore",
+    "react",
+    "shadcn",
+    "shadcn-ui",
+    "state",
+    "store",
+    "typescript"
+  ],
+  "homepage": "https://github.com/yusing/juststore-shadcn",
+  "bugs": {
+    "url": "https://github.com/yusing/juststore-shadcn/issues"
+  },
+  "license": "AGPL-3.0-only",
   "author": "Yusing",
   "repository": {
     "type": "git",
     "url": "https://github.com/yusing/juststore-shadcn"
   },
-  "homepage": "https://github.com/yusing/juststore-shadcn",
-  "bugs": {
-    "url": "https://github.com/yusing/juststore-shadcn/issues"
-  },
+  "type": "module",
   "sideEffects": false,
-  "license": "AGPL-3.0-only",
-  "keywords": [
-    "shadcn",
-    "shadcn-ui",
-    "state",
-    "juststore",
-    "react",
-    "typescript",
-    "hooks",
-    "store"
-  ],
   "scripts": {
     "build": "bun run tsc",
-    "typecheck": "bun run tsc --noEmit",
-    "lint": "bun run eslint src/store/**",
     "format": "bun run prettier --write src/store/**",
-    "format:check": "bun run prettier --check src/store/**"
-  },
-  "peerDependencies": {
-    "react": ">=18.0.0",
-    "tailwindcss": "^4.2.1",
-    "tailwind-merge": ">=3.0.0",
-    "clsx": ">=2.0.0",
-    "class-variance-authority": ">=0.7.0"
+    "format:check": "bun run prettier --check src/store/**",
+    "lint": "bun run eslint src/store/**",
+    "typecheck": "bun run tsc --noEmit"
   },
   "dependencies": {
     "change-case": "^5.4.4",
-    "juststore": "^1.1.0"
+    "juststore": "^1.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.6",
-    "@base-ui/react": "^1.2.0",
+    "@base-ui/react": "^1.3.0",
+    "@biomejs/biome": "^2.4.11",
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.3.5",
+    "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "husky": "^9.1.7",
-    "react": "^19.2.4",
+    "react": "^19.2.5",
     "tailwind-merge": "^3.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
+  },
+  "peerDependencies": {
+    "class-variance-authority": ">=0.7.0",
+    "clsx": ">=2.0.0",
+    "react": ">=18.0.0",
+    "tailwind-merge": ">=3.0.0",
+    "tailwindcss": "^4.2.2"
   }
 }
