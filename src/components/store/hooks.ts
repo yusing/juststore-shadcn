@@ -56,13 +56,13 @@ function useResolveMultipleChoices<T extends Stringable>({
     if (value && !resolvedOptions.some(option => String(option.value) === String(value))) {
       const v = defaultValue ?? resolvedOptions[0]?.value
       if (v === undefined || v === null) {
-        return undefined
+        return ''
       }
       return String(v)
     }
     const final = value ?? defaultValue ?? resolvedOptions[0]?.value
     if (final === undefined || final === null) {
-      return undefined
+      return ''
     }
     return String(final)
   }, [value, defaultValue, resolvedOptions])
