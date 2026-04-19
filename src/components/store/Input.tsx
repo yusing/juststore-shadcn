@@ -1,6 +1,6 @@
 'use client'
 
-import { IconEye, IconEyeClosed } from '@tabler/icons-react'
+import { Eye, EyeOff } from 'lucide-react'
 import { RenderWithUpdate } from 'juststore'
 import { type ComponentProps, type HTMLInputTypeAttribute, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -105,7 +105,7 @@ function StorePasswordField<T extends Stringable, Form = false>({
               className="opacity-70 hover:opacity-100 size-8"
               onClick={() => setIsVisible(!isVisible)}
             >
-              {isVisible ? <IconEyeClosed /> : <IconEye />}
+              {isVisible ? <EyeOff /> : <Eye />}
             </Button>
           ),
         },

@@ -1,6 +1,6 @@
 'use client'
 
-import { IconInfoCircle } from '@tabler/icons-react'
+import { Info } from 'lucide-react'
 import { FieldLabel } from '@/components/ui/field'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
@@ -40,7 +40,7 @@ function StoreLabel<T, Form = false>({
       {descriptionVariant === 'tooltip' && description && (
         <Tooltip>
           <TooltipTrigger>
-            <IconInfoCircle className="size-4" />
+            <Info className="size-4" />
           </TooltipTrigger>
           <TooltipContent className="min-w-fit">{description}</TooltipContent>
         </Tooltip>
