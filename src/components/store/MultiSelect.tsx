@@ -66,14 +66,15 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
   const stringValues = state.useCompute(value =>
     value ? value.map(v => String(v)) : (defaultValue?.map(v => String(v)) ?? [])
   )
-  const stringOptions = useMemo(() => resolvedOptions.map(o => String(o.value)), [resolvedOptions])
+  const optionByStringValue = useMemo(
+    () => new Map(resolvedOptions.map(option => [String(option.value), option])),
+    [resolvedOptions]
+  )
 
   const handleValueChange = (newValue: string[]) => {
-    if (!newValue.length) {
-      return
-    }
-    const indexes = newValue.map(v => stringOptions.findIndex(sv => sv === v))
-    const changed = indexes.map(i => resolvedOptions[i]!.value) as T[]
+    const changed = newValue
+      .map(value => optionByStringValue.get(value)?.value)
+      .filter(value => value !== undefined) as T[]
     state.set(changed)
   }
 
@@ -96,8 +97,8 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
       >
         <ComboboxChips>
           <ComboboxValue>
-            {stringValues.map((v, index) => {
-              const option = resolvedOptions[index]!
+            {stringValues.map(v => {
+              const option = optionByStringValue.get(v)
               return (
                 <ComboboxChip key={v}>
                   {option?.icon && <option.icon className="size-3" />}

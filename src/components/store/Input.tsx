@@ -66,8 +66,8 @@ function StoreInputField<T extends Stringable, Form = false>({
             />
           )}
         </RenderWithUpdate>
-        {addons.map((props, index) => (
-          <InputGroupAddon key={index} {...props} />
+        {addons.map((addonProps, index) => (
+          <InputGroupAddon key={index} {...addonProps} />
         ))}
       </InputGroup>
       {descriptionVariant === 'inline' && description && (
