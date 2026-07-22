@@ -58,7 +58,7 @@ function MyForm() {
     email: '',
     age: 18,
     theme: 'light',
-    newsletter: false
+    newsletter: false,
   })
 
   return (
@@ -90,7 +90,7 @@ function MyForm() {
   const form = useForm({
     username: '',
     password: '',
-    port: 8080
+    port: 8080,
   })
 
   return (
@@ -172,7 +172,7 @@ function MyForm() {
         title="Runtime"
         options={[
           { label: 'Docker', value: 'docker', icon: DockerIcon },
-          { label: 'Podman', value: 'podman', icon: PodmanIcon }
+          { label: 'Podman', value: 'podman', icon: PodmanIcon },
         ]}
         orientation="horizontal"
       />
@@ -197,7 +197,7 @@ function MyForm() {
       options={[
         { label: 'United States', value: 'us' },
         { label: 'Canada', value: 'ca' },
-        { label: 'United Kingdom', value: 'uk' }
+        { label: 'United Kingdom', value: 'uk' },
       ]}
       placeholder="Select a country"
     />
@@ -216,7 +216,7 @@ function MyForm() {
   const form = useForm({
     name: '',
     email: '',
-    newsletter: false
+    newsletter: false,
   })
 
   return (
