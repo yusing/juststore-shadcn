@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "change-case": "^5.4.4",
-    "juststore": "^1.2.2"
+    "juststore": "^1.2.3"
   },
   "devDependencies": {
     "@base-ui/react": "^1.6.0",
@@ -43,9 +43,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "husky": "^9.1.7",
-    "react": "^19.2.7",
+    "react": "^19.2.8",
     "tailwind-merge": "^3.6.0",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "peerDependencies": {
     "class-variance-authority": ">=0.7.0",
