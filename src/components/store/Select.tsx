@@ -16,6 +16,7 @@ import { StoreLabel } from './Label'
 import type {
   DefaultValue,
   FormComponentProps,
+  Option,
   Options,
   Prettify,
   StoreFieldPropsCommon,
@@ -62,6 +63,16 @@ function StoreSelectField<T extends Stringable, Form = false>({
     capitalizePrimitiveOptions: capitalizeSelectItems,
   })
 
+  // Base UI resolves the trigger's text from `items`; without it the raw value is shown.
+  const items = useMemo(
+    () =>
+      resolvedOptions.map(option => ({
+        value: option.value == null ? option.value : String(option.value),
+        label: optionLabel(option, capitalizeSelectItems),
+      })),
+    [resolvedOptions, capitalizeSelectItems]
+  )
+
   return (
     <Field orientation={orientation}>
       <StoreLabel
@@ -73,7 +84,15 @@ function StoreSelectField<T extends Stringable, Form = false>({
         required={required}
         {...labelProps}
       />
-      <Select value={stringValue} onValueChange={v => setValue(v as T)}>
+      {/* `name` keeps Base UI's hidden validation input positioned in place, so a `required`
+          violation anchors its bubble to the trigger instead of the viewport corner. */}
+      <Select
+        name={fieldId}
+        required={required}
+        items={items}
+        value={stringValue}
+        onValueChange={v => setValue(v as T)}
+      >
         <SelectTrigger id={fieldId} className={className}>
           <SelectValue placeholder={placeholderValue(placeholder, defaultValue)} {...props} />
         </SelectTrigger>
@@ -84,12 +103,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
               value={option.value == null ? option.value : String(option.value)}
             >
               {option.icon && <option.icon className="size-4" />}
-              <span className="flex-1">
-                {capitalizeSelectItems &&
-                (typeof option.label === 'string' || typeof option.label === 'number')
-                  ? capitalCase(String(option.label))
-                  : option.label}
-              </span>
+              <span className="flex-1">{optionLabel(option, capitalizeSelectItems)}</span>
             </SelectItem>
           ))}
         </SelectContent>
@@ -100,6 +114,13 @@ function StoreSelectField<T extends Stringable, Form = false>({
       <StoreError error={error} />
     </Field>
   )
+}
+
+function optionLabel<T extends Stringable>(option: Option<T>, capitalize: boolean) {
+  if (capitalize && (typeof option.label === 'string' || typeof option.label === 'number')) {
+    return capitalCase(String(option.label))
+  }
+  return option.label
 }
 
 function placeholderValue(placeholder: React.ReactNode | undefined, defaultValue: Stringable) {

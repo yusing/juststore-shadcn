@@ -53,6 +53,8 @@ function StoreCheckboxField<T extends boolean | undefined, Form = false>({
           {(value, update) => (
             <Checkbox
               id={fieldId}
+              name={fieldId}
+              required={required}
               defaultChecked={defaultValue}
               checked={Boolean(value)}
               onCheckedChange={checked => update(checked as T)}

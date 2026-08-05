@@ -21,13 +21,54 @@ function StoreFormInputField<T extends Stringable>(props: InputFieldProps<T, tru
 }
 
 function convertInputValue<T>(value: T | undefined, type: HTMLInputTypeAttribute | undefined) {
-  if (!value) return undefined
+  if (value == null) return undefined
   if (type === 'number') {
+    if (value === '') return undefined
     const n = Number(value)
     if (Number.isNaN(n)) return undefined
     return n
   }
+  // Keep '' as '': returning undefined deletes the key from the store, so consumers
+  // reading the submitted snapshot would see `undefined` instead of an empty string.
   return String(value)
+}
+
+type StoreInputControlProps<T extends Stringable> = Omit<
+  ComponentProps<typeof InputGroupInput>,
+  'value' | 'onChange'
+> & {
+  value: T | undefined
+  update: (value: T) => void
+}
+
+function StoreInputControl<T extends Stringable>({
+  value,
+  update,
+  onBlur,
+  ...props
+}: StoreInputControlProps<T>) {
+  // A number input round-trips through Number(), which collapses text that is a valid
+  // prefix but not yet a valid number ('1.', '-', '1e', '0.50'). Hold that raw text until
+  // it agrees with the stored value again, so typing is not clobbered mid-edit.
+  const [draft, setDraft] = useState<string | null>(null)
+  const isNumber = props.type === 'number'
+
+  return (
+    <InputGroupInput
+      {...props}
+      value={(isNumber ? draft : null) ?? String(value ?? '')}
+      onChange={e => {
+        const raw = e.target.value
+        const converted = convertInputValue(raw, props.type)
+        if (isNumber) setDraft(String(converted ?? '') === raw ? null : raw)
+        update(converted as T)
+      }}
+      onBlur={e => {
+        setDraft(null)
+        onBlur?.(e)
+      }}
+    />
+  )
 }
 
 function StoreInputField<T extends Stringable, Form = false>({
@@ -58,10 +99,11 @@ function StoreInputField<T extends Stringable, Form = false>({
       <InputGroup>
         <RenderWithUpdate state={state}>
           {(value, update) => (
-            <InputGroupInput
+            <StoreInputControl<T>
               id={fieldId}
-              value={String(value ?? ('' as T))}
-              onChange={e => update(convertInputValue(e.target.value, props.type) as T)}
+              required={required}
+              value={value as T | undefined}
+              update={update}
               {...props}
             />
           )}

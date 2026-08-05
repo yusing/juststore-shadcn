@@ -42,6 +42,7 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
         {(value, update) => (
           <Textarea
             id={id ?? state.field}
+            required={required}
             value={value ?? ''}
             onChange={e => update(e.target.value as T)}
             {...props}
