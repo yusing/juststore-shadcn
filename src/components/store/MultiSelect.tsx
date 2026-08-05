@@ -19,6 +19,7 @@ import { StoreLabel } from './Label'
 import type {
   DefaultValue,
   FormComponentProps,
+  FormFieldProps,
   Option,
   Options,
   Prettify,
@@ -33,7 +34,9 @@ type MultiSelectFieldProps<T extends Stringable, Form = false> = Prettify<
     DefaultValue<ReadonlyArray<T>>
 >
 
-function StoreFormMultiSelectField<T extends Stringable>(props: MultiSelectFieldProps<T, true>) {
+function StoreFormMultiSelectField<T extends Stringable>(
+  props: FormFieldProps<MultiSelectFieldProps<T, true>>
+) {
   return <StoreMultiSelectField<T, true> {...props} error={props.state.useError} />
 }
 

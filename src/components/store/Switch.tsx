@@ -6,7 +6,13 @@ import { Field, FieldDescription } from '@/components/ui/field'
 import { Switch } from '@/components/ui/switch'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
-import type { DefaultValue, FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
+import type {
+  DefaultValue,
+  FormComponentProps,
+  FormFieldProps,
+  Prettify,
+  StoreFieldPropsCommon,
+} from './types'
 
 type SwitchFieldProps<T extends boolean | undefined, Form = false> = Prettify<
   Omit<StoreFieldPropsCommon<T, Form>, 'orientation'> &
@@ -16,7 +22,9 @@ type SwitchFieldProps<T extends boolean | undefined, Form = false> = Prettify<
     }
 >
 
-function StoreFormSwitchField<T extends boolean | undefined>(props: SwitchFieldProps<T, true>) {
+function StoreFormSwitchField<T extends boolean | undefined>(
+  props: FormFieldProps<SwitchFieldProps<T, true>>
+) {
   return <StoreSwitchField<T, true> {...props} error={props.state.useError} />
 }
 

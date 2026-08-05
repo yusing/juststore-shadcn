@@ -16,6 +16,7 @@ import { StoreLabel } from './Label'
 import type {
   DefaultValue,
   FormComponentProps,
+  FormFieldProps,
   Option,
   Options,
   Prettify,
@@ -32,7 +33,9 @@ type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
     }
 >
 
-function StoreFormSelectField<T extends Stringable>(props: SelectFieldProps<T, true>) {
+function StoreFormSelectField<T extends Stringable>(
+  props: FormFieldProps<SelectFieldProps<T, true>>
+) {
   return <StoreSelectField<T, true> {...props} error={props.state.useError} />
 }
 

@@ -5,13 +5,21 @@ import { Field, FieldDescription } from '@/components/ui/field'
 import { Textarea } from '@/components/ui/textarea'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
-import type { FormComponentProps, Prettify, StoreFieldPropsCommon, Stringable } from './types'
+import type {
+  FormComponentProps,
+  FormFieldProps,
+  Prettify,
+  StoreFieldPropsCommon,
+  Stringable,
+} from './types'
 
 type TextAreaFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & FormComponentProps<typeof Textarea>
 >
 
-function StoreFormTextAreaField<T extends Stringable>(props: TextAreaFieldProps<T, true>) {
+function StoreFormTextAreaField<T extends Stringable>(
+  props: FormFieldProps<TextAreaFieldProps<T, true>>
+) {
   return <StoreTextAreaField<T, true> {...props} error={props.state.useError} />
 }
 

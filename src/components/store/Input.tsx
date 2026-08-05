@@ -8,7 +8,13 @@ import { Field, FieldDescription } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
-import type { FormComponentProps, Prettify, StoreFieldPropsCommon, Stringable } from './types'
+import type {
+  FormComponentProps,
+  FormFieldProps,
+  Prettify,
+  StoreFieldPropsCommon,
+  Stringable,
+} from './types'
 
 type InputFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & {
@@ -16,7 +22,7 @@ type InputFieldProps<T extends Stringable, Form = false> = Prettify<
   } & FormComponentProps<typeof InputGroupInput>
 >
 
-function StoreFormInputField<T extends Stringable>(props: InputFieldProps<T, true>) {
+function StoreFormInputField<T extends Stringable>(props: FormFieldProps<InputFieldProps<T, true>>) {
   return <StoreInputField<T, true> {...props} error={props.state.useError} />
 }
 
@@ -123,7 +129,9 @@ function StoreInputField<T extends Stringable, Form = false>({
 type PasswordFieldProps<T extends Stringable, Form = false> = StoreFieldPropsCommon<T, Form> &
   Omit<ComponentProps<typeof StoreInputField<T, Form>>, 'value' | 'onChange' | 'type'>
 
-function StoreFormPasswordField<T extends Stringable>(props: PasswordFieldProps<T, true>) {
+function StoreFormPasswordField<T extends Stringable>(
+  props: FormFieldProps<PasswordFieldProps<T, true>>
+) {
   return <StorePasswordField<T, true> {...props} error={props.state.useError} />
 }
 

@@ -6,7 +6,13 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Field, FieldDescription } from '@/components/ui/field'
 import { StoreError } from './Error'
 import { StoreLabel } from './Label'
-import type { DefaultValue, FormComponentProps, Prettify, StoreFieldPropsCommon } from './types'
+import type {
+  DefaultValue,
+  FormComponentProps,
+  FormFieldProps,
+  Prettify,
+  StoreFieldPropsCommon,
+} from './types'
 
 type CheckboxFieldProps<T extends boolean | undefined, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> &
@@ -16,7 +22,9 @@ type CheckboxFieldProps<T extends boolean | undefined, Form = false> = Prettify<
     }
 >
 
-function StoreFormCheckboxField<T extends boolean | undefined>(props: CheckboxFieldProps<T, true>) {
+function StoreFormCheckboxField<T extends boolean | undefined>(
+  props: FormFieldProps<CheckboxFieldProps<T, true>>
+) {
   return <StoreCheckboxField<T, true> {...props} error={props.state.useError} />
 }
 

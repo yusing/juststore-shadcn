@@ -10,6 +10,7 @@ import { StoreLabel } from './Label'
 import type {
   DefaultValue,
   FormComponentProps,
+  FormFieldProps,
   Options,
   Prettify,
   StoreFieldPropsCommon,
@@ -25,7 +26,9 @@ type RadioFieldProps<T extends Stringable, Form = false> = Prettify<
     }
 >
 
-function StoreFormRadioField<T extends Stringable>(props: RadioFieldProps<T, true>) {
+function StoreFormRadioField<T extends Stringable>(
+  props: FormFieldProps<RadioFieldProps<T, true>>
+) {
   return <StoreRadioField<T, true> {...props} error={props.state.useError} />
 }
 

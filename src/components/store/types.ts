@@ -16,6 +16,26 @@ type DescriptionVariant = 'inline' | 'tooltip'
 type Prettify<T> = {
   [K in keyof T]: T[K]
 } & {}
+
+/** Resolves the current error message, or `undefined` when the field is valid. */
+type FieldErrorFn = () => string | undefined
+
+/**
+ * Public props of a `StoreForm*` wrapper: the field props with `error` closed off.
+ *
+ * `error` stays writable on the underlying field props so the wrapper can bind it
+ * to `state.useError`, but callers cannot pass one — form errors are owned by the
+ * form state.
+ *
+ * Written as an intersection rather than `Omit<Props, 'error'>` on purpose: `Omit`
+ * is a `Pick` in disguise, and inference through it fails, collapsing each field's
+ * value generic to its constraint at the call site.
+ */
+type FormFieldProps<Props> = Props & {
+  /** @deprecated A form field takes its error from the form state. Use a `fieldConfigs`
+   * validator, or `state.setError(...)` for server/imperative failures. */
+  error?: never
+}
 type DefaultValue<T> = { defaultValue?: T }
 
 type AnyStringCompatible = string | number | undefined
@@ -71,16 +91,20 @@ type StoreFieldPropsCommon<T, Form = false> = {
    */
   labelProps?: React.ComponentProps<typeof FieldLabel>
   /** Field error
+   *
+   * Not part of the `StoreForm*` public surface — those wrappers bind it to
+   * `state.useError`. See {@link FormFieldProps}.
    * @default undefined
-   * @default state.error // form state only
    */
-  error?: () => string | undefined
+  error?: FieldErrorFn
 }
 
 export type {
   DefaultValue,
   DescriptionVariant,
+  FieldErrorFn,
   FormComponentProps,
+  FormFieldProps,
   Option,
   Options,
   Prettify,
