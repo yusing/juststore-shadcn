@@ -38,6 +38,15 @@ type FormFieldProps<Props> = Props & {
 }
 type DefaultValue<T> = { defaultValue?: T }
 
+/**
+ * Whether the field is required.
+ *
+ * `true` marks the control required and shows a red asterisk next to the label.
+ * `'silent'` marks the control required without the asterisk, which suits a form
+ * where every field is required, such as a login page.
+ */
+type RequiredProp = boolean | 'silent'
+
 type AnyStringCompatible = string | number | undefined
 type AnyBooleanCompatible = boolean | undefined
 
@@ -49,6 +58,7 @@ type FormComponentProps<
   | 'title'
   | 'description'
   | 'error'
+  | 'required'
   | 'value'
   | 'checked'
   | 'onChange'
@@ -77,10 +87,10 @@ type StoreFieldPropsCommon<T, Form = false> = {
    * @default 'inline'
    */
   descriptionVariant?: DescriptionVariant
-  /** Required field
+  /** Required field. See {@link RequiredProp}.
    * @default false
    */
-  required?: boolean
+  required?: RequiredProp
   /** Field orientation
    * @default 'vertical'
    * @default 'horizontal' // checkbox and radio only
@@ -108,6 +118,7 @@ export type {
   Option,
   Options,
   Prettify,
+  RequiredProp,
   StoreFieldPropsCommon,
 }
 

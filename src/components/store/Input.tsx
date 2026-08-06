@@ -107,7 +107,7 @@ function StoreInputField<T extends Stringable, Form = false>({
           {(value, update) => (
             <StoreInputControl<T>
               id={fieldId}
-              required={required}
+              required={Boolean(required)}
               value={value as T | undefined}
               update={update}
               {...props}

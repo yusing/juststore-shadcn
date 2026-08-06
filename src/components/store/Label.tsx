@@ -35,7 +35,7 @@ function StoreLabel<T, Form = false>({
     >
       <span className="flex items-center gap-1">
         {fieldTitle}
-        {required && <span className="text-red-500">*</span>}
+        {required === true && <span className="text-red-500">*</span>}
       </span>
       {descriptionVariant === 'tooltip' && description && (
         <Tooltip>

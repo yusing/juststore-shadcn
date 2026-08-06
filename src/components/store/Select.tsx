@@ -91,7 +91,7 @@ function StoreSelectField<T extends Stringable, Form = false>({
           violation anchors its bubble to the trigger instead of the viewport corner. */}
       <Select
         name={fieldId}
-        required={required}
+        required={Boolean(required)}
         items={items}
         value={stringValue}
         onValueChange={v => setValue(v as T)}
