@@ -47,34 +47,34 @@ Copy what you need from `src/components/store` to your project `components/store
 ### Basic Form Setup
 
 ```tsx
-import { useForm } from 'juststore'
-import { StoreFormInputField } from '@/components/store/Input'
-import { StoreFormCheckboxField } from '@/components/store/Checkbox'
-import { StoreFormRadioField } from '@/components/store/Radio'
+import { useForm } from "juststore";
+import { StoreFormInputField } from "@/components/store/Input";
+import { StoreFormCheckboxField } from "@/components/store/Checkbox";
+import { StoreFormRadioField } from "@/components/store/Radio";
 
 function MyForm() {
   const form = useForm({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     age: 18,
-    theme: 'light',
+    theme: "light",
     newsletter: false,
-  })
+  });
 
   return (
     <form
-      onSubmit={form.handleSubmit(data => {
-        console.log('Form submitted:', data)
+      onSubmit={form.handleSubmit((data) => {
+        console.log("Form submitted:", data);
       })}
     >
       <StoreFormInputField state={form.name} />
       <StoreFormInputField state={form.email} type="email" />
       <StoreFormInputField state={form.age} type="number" />
-      <StoreFormRadioField state={form.theme} options={['light', 'dark']} />
+      <StoreFormRadioField state={form.theme} options={["light", "dark"]} />
       <StoreFormCheckboxField state={form.newsletter} />
       <button type="submit">Submit</button>
     </form>
-  )
+  );
 }
 ```
 
@@ -83,15 +83,15 @@ function MyForm() {
 #### Input Fields
 
 ```tsx
-import { useForm } from 'juststore'
-import { StoreFormInputField, StoreFormPasswordField } from '@/components/store/Input'
+import { useForm } from "juststore";
+import { StoreFormInputField, StoreFormPasswordField } from "@/components/store/Input";
 
 function MyForm() {
   const form = useForm({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     port: 8080,
-  })
+  });
 
   return (
     <>
@@ -103,7 +103,7 @@ function MyForm() {
         state={form.username}
         title="Username"
         orientation="horizontal"
-        labelProps={{ className: 'min-w-[120px]' }}
+        labelProps={{ className: "min-w-[120px]" }}
       />
 
       {/* Number input */}
@@ -112,19 +112,19 @@ function MyForm() {
       {/* Password field with visibility toggle */}
       <StoreFormPasswordField state={form.password} />
     </>
-  )
+  );
 }
 ```
 
 #### Checkbox Fields
 
 ```tsx
-import { useForm, useMemoryStore } from 'juststore'
-import { StoreFormCheckboxField, StoreCheckboxField } from '@/components/store/Checkbox'
+import { useForm, useMemoryStore } from "juststore";
+import { StoreFormCheckboxField, StoreCheckboxField } from "@/components/store/Checkbox";
 
 function MyForm() {
-  const form = useForm({ acceptTerms: false })
-  const settings = useMemoryStore({ enableNotifications: true })
+  const form = useForm({ acceptTerms: false });
+  const settings = useMemoryStore({ enableNotifications: true });
 
   return (
     <>
@@ -143,18 +143,18 @@ function MyForm() {
         descriptionVariant="tooltip"
       />
     </>
-  )
+  );
 }
 ```
 
 #### Radio Fields
 
 ```tsx
-import { useForm } from 'juststore'
-import { StoreFormRadioField } from '@/components/store/Radio'
+import { useForm } from "juststore";
+import { StoreFormRadioField } from "@/components/store/Radio";
 
 function MyForm() {
-  const form = useForm({ containerRuntime: 'docker' })
+  const form = useForm({ containerRuntime: "docker" });
 
   return (
     <>
@@ -162,7 +162,7 @@ function MyForm() {
       <StoreFormRadioField
         state={form.containerRuntime}
         title="Runtime"
-        options={['docker', 'podman']}
+        options={["docker", "podman"]}
         orientation="horizontal"
       />
 
@@ -171,53 +171,53 @@ function MyForm() {
         state={form.containerRuntime}
         title="Runtime"
         options={[
-          { label: 'Docker', value: 'docker', icon: DockerIcon },
-          { label: 'Podman', value: 'podman', icon: PodmanIcon },
+          { label: "Docker", value: "docker", icon: DockerIcon },
+          { label: "Podman", value: "podman", icon: PodmanIcon },
         ]}
         orientation="horizontal"
       />
     </>
-  )
+  );
 }
 ```
 
 #### Select Fields
 
 ```tsx
-import { useForm } from 'juststore'
-import { StoreFormSelectField } from '@/components/store/Select'
+import { useForm } from "juststore";
+import { StoreFormSelectField } from "@/components/store/Select";
 
 function MyForm() {
-  const form = useForm({ country: '' })
+  const form = useForm({ country: "" });
 
   return (
     <StoreFormSelectField
       state={form.country}
       title="Country"
       options={[
-        { label: 'United States', value: 'us' },
-        { label: 'Canada', value: 'ca' },
-        { label: 'United Kingdom', value: 'uk' },
+        { label: "United States", value: "us" },
+        { label: "Canada", value: "ca" },
+        { label: "United Kingdom", value: "uk" },
       ]}
       placeholder="Select a country"
     />
-  )
+  );
 }
 ```
 
 #### Field Groups
 
 ```tsx
-import { FieldGroup } from '@/components/ui/field'
-import { StoreFormInputField } from '@/components/store/Input'
-import { StoreFormCheckboxField } from '@/components/store/Checkbox'
+import { FieldGroup } from "@/components/ui/field";
+import { StoreFormInputField } from "@/components/store/Input";
+import { StoreFormCheckboxField } from "@/components/store/Checkbox";
 
 function MyForm() {
   const form = useForm({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     newsletter: false,
-  })
+  });
 
   return (
     <FieldGroup className="gap-4">
@@ -225,7 +225,7 @@ function MyForm() {
       <StoreFormInputField state={form.email} orientation="horizontal" />
       <StoreFormCheckboxField state={form.newsletter} />
     </FieldGroup>
-  )
+  );
 }
 ```
 

@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import { RenderWithUpdate } from 'juststore'
-import { Field, FieldDescription } from '@/components/ui/field'
-import { Textarea } from '@/components/ui/textarea'
-import { StoreError } from './Error'
-import { StoreLabel } from './Label'
+import { RenderWithUpdate } from "juststore";
+import { Field, FieldDescription } from "@/components/ui/field";
+import { Textarea } from "@/components/ui/textarea";
+import { StoreError } from "./Error";
+import { StoreLabel } from "./Label";
 import type {
   FormComponentProps,
   FormFieldProps,
   Prettify,
   StoreFieldPropsCommon,
   Stringable,
-} from './types'
+} from "./types";
 
 type TextAreaFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & FormComponentProps<typeof Textarea>
->
+>;
 
 function StoreFormTextAreaField<T extends Stringable>(
-  props: FormFieldProps<TextAreaFieldProps<T, true>>
+  props: FormFieldProps<TextAreaFieldProps<T, true>>,
 ) {
-  return <StoreTextAreaField<T, true> {...props} error={props.state.useError} />
+  return <StoreTextAreaField<T, true> {...props} error={props.state.useError} />;
 }
 
 function StoreTextAreaField<T extends Stringable, Form = false>({
@@ -28,9 +28,9 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
   id,
   title,
   description,
-  descriptionVariant = 'inline',
+  descriptionVariant = "inline",
   required = false,
-  orientation = 'vertical',
+  orientation = "vertical",
   labelProps,
   error,
   ...props
@@ -51,18 +51,18 @@ function StoreTextAreaField<T extends Stringable, Form = false>({
           <Textarea
             id={id ?? state.field}
             required={Boolean(required)}
-            value={value ?? ''}
-            onChange={e => update(e.target.value as T)}
+            value={value ?? ""}
+            onChange={(e) => update(e.target.value as T)}
             {...props}
           />
         )}
       </RenderWithUpdate>
-      {descriptionVariant === 'inline' && description && (
+      {descriptionVariant === "inline" && description && (
         <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
       <StoreError error={error} />
     </Field>
-  )
+  );
 }
 
-export { StoreFormTextAreaField, StoreTextAreaField, type TextAreaFieldProps }
+export { StoreFormTextAreaField, StoreTextAreaField, type TextAreaFieldProps };

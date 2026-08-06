@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { useMemo } from 'react'
-import { Field, FieldDescription, FieldLabel } from '@/components/ui/field'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { cn } from '@/lib/utils'
-import { StoreError } from './Error'
-import { useResolveMultipleChoices } from './hooks'
-import { StoreLabel } from './Label'
+import { useMemo } from "react";
+import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
+import { StoreError } from "./Error";
+import { useResolveMultipleChoices } from "./hooks";
+import { StoreLabel } from "./Label";
 import type {
   DefaultValue,
   FormComponentProps,
@@ -15,21 +15,21 @@ import type {
   Prettify,
   StoreFieldPropsCommon,
   Stringable,
-} from './types'
+} from "./types";
 
 type RadioFieldProps<T extends Stringable, Form = false> = Prettify<
-  Omit<StoreFieldPropsCommon<T, Form>, 'orientation'> &
+  Omit<StoreFieldPropsCommon<T, Form>, "orientation"> &
     FormComponentProps<typeof RadioGroup> &
     DefaultValue<T> & {
-      options: Options<T>
-      labelPlacement?: 'left' | 'right'
+      options: Options<T>;
+      labelPlacement?: "left" | "right";
     }
->
+>;
 
 function StoreFormRadioField<T extends Stringable>(
-  props: FormFieldProps<RadioFieldProps<T, true>>
+  props: FormFieldProps<RadioFieldProps<T, true>>,
 ) {
-  return <StoreRadioField<T, true> {...props} error={props.state.useError} />
+  return <StoreRadioField<T, true> {...props} error={props.state.useError} />;
 }
 
 function StoreRadioField<T extends Stringable, Form = false>({
@@ -37,25 +37,25 @@ function StoreRadioField<T extends Stringable, Form = false>({
   id,
   title,
   description,
-  descriptionVariant = 'inline',
+  descriptionVariant = "inline",
   required = false,
   error,
   options,
   defaultValue,
   labelProps,
-  labelPlacement = 'left',
+  labelPlacement = "left",
   className,
   ...props
 }: RadioFieldProps<T, Form>) {
-  const fieldId = useMemo(() => id ?? state.field, [id, state.field])
+  const fieldId = useMemo(() => id ?? state.field, [id, state.field]);
 
-  const [value, setValue] = state.useState()
+  const [value, setValue] = state.useState();
 
   const { resolvedOptions, stringValue } = useResolveMultipleChoices({
     options,
     value,
     defaultValue,
-  })
+  });
 
   const label = (
     <StoreLabel
@@ -67,19 +67,19 @@ function StoreRadioField<T extends Stringable, Form = false>({
       required={required}
       {...labelProps}
     />
-  )
+  );
 
   return (
     <Field orientation="vertical">
       <div className="flex flex-col items-start gap-2">
-        {labelPlacement === 'left' && label}
+        {labelPlacement === "left" && label}
         <RadioGroup
-          className={cn('flex flex-col', className)}
+          className={cn("flex flex-col", className)}
           value={stringValue}
-          onValueChange={v => setValue(v as T)}
+          onValueChange={(v) => setValue(v as T)}
           {...props}
         >
-          {resolvedOptions.map(option => (
+          {resolvedOptions.map((option) => (
             <Field key={option.value} orientation="horizontal">
               <RadioGroupItem value={String(option.value)} id={`${fieldId}-${option.value}`} />
               <FieldLabel htmlFor={`${fieldId}-${option.value}`} className="font-medium">
@@ -89,14 +89,14 @@ function StoreRadioField<T extends Stringable, Form = false>({
             </Field>
           ))}
         </RadioGroup>
-        {labelPlacement === 'right' && label}
+        {labelPlacement === "right" && label}
       </div>
-      {descriptionVariant === 'inline' && description && (
+      {descriptionVariant === "inline" && description && (
         <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
       <StoreError error={error} />
     </Field>
-  )
+  );
 }
 
-export { StoreFormRadioField, StoreRadioField, type RadioFieldProps }
+export { StoreFormRadioField, StoreRadioField, type RadioFieldProps };

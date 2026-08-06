@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import { capitalCase } from 'change-case'
-import { useMemo } from 'react'
+import { capitalCase } from "change-case";
+import { useMemo } from "react";
 import {
   Combobox,
   ComboboxChip,
@@ -12,10 +12,10 @@ import {
   ComboboxItem,
   ComboboxList,
   ComboboxValue,
-} from '@/components/ui/combobox'
-import { Field, FieldDescription } from '@/components/ui/field'
-import { StoreError } from './Error'
-import { StoreLabel } from './Label'
+} from "@/components/ui/combobox";
+import { Field, FieldDescription } from "@/components/ui/field";
+import { StoreError } from "./Error";
+import { StoreLabel } from "./Label";
 import type {
   DefaultValue,
   FormComponentProps,
@@ -25,19 +25,19 @@ import type {
   Prettify,
   StoreFieldPropsCommon,
   Stringable,
-} from './types'
+} from "./types";
 
 type MultiSelectFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T[], Form> & {
-    options: Options<T>
+    options: Options<T>;
   } & FormComponentProps<typeof ComboboxChipsInput> &
     DefaultValue<ReadonlyArray<T>>
->
+>;
 
 function StoreFormMultiSelectField<T extends Stringable>(
-  props: FormFieldProps<MultiSelectFieldProps<T, true>>
+  props: FormFieldProps<MultiSelectFieldProps<T, true>>,
 ) {
-  return <StoreMultiSelectField<T, true> {...props} error={props.state.useError} />
+  return <StoreMultiSelectField<T, true> {...props} error={props.state.useError} />;
 }
 
 function StoreMultiSelectField<T extends Stringable, Form = false>({
@@ -45,41 +45,41 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
   id,
   title,
   description,
-  descriptionVariant = 'inline',
+  descriptionVariant = "inline",
   required = false,
   labelProps,
   error,
   options,
   defaultValue,
-  orientation = 'vertical',
+  orientation = "vertical",
   placeholder,
   className,
   ...props
 }: MultiSelectFieldProps<T, Form>) {
   const resolvedOptions: Readonly<Option<T>[]> = useMemo(
     () =>
-      options.map(option =>
-        typeof option === 'object'
+      options.map((option) =>
+        typeof option === "object"
           ? option
-          : { label: capitalCase(String(option)), value: option, icon: undefined }
+          : { label: capitalCase(String(option)), value: option, icon: undefined },
       ),
-    [options]
-  )
+    [options],
+  );
 
-  const stringValues = state.useCompute(value =>
-    value ? value.map(v => String(v)) : (defaultValue?.map(v => String(v)) ?? [])
-  )
+  const stringValues = state.useCompute((value) =>
+    value ? value.map((v) => String(v)) : (defaultValue?.map((v) => String(v)) ?? []),
+  );
   const optionByStringValue = useMemo(
-    () => new Map(resolvedOptions.map(option => [String(option.value), option])),
-    [resolvedOptions]
-  )
+    () => new Map(resolvedOptions.map((option) => [String(option.value), option])),
+    [resolvedOptions],
+  );
 
   const handleValueChange = (newValue: string[]) => {
     const changed = newValue
-      .map(value => optionByStringValue.get(value)?.value)
-      .filter(value => value !== undefined) as T[]
-    state.set(changed)
-  }
+      .map((value) => optionByStringValue.get(value)?.value)
+      .filter((value) => value !== undefined) as T[];
+    state.set(changed);
+  };
 
   return (
     <Field orientation={orientation}>
@@ -100,14 +100,14 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
       >
         <ComboboxChips>
           <ComboboxValue>
-            {stringValues.map(v => {
-              const option = optionByStringValue.get(v)
+            {stringValues.map((v) => {
+              const option = optionByStringValue.get(v);
               return (
                 <ComboboxChip key={v}>
                   {option?.icon && <option.icon className="size-3" />}
                   <span>{option ? option.label : capitalCase(String(v))}</span>
                 </ComboboxChip>
-              )
+              );
             })}
           </ComboboxValue>
           {/* FIXME: this is a workaround, somehow the placeholder is showing even if there are values */}
@@ -129,12 +129,12 @@ function StoreMultiSelectField<T extends Stringable, Form = false>({
           </ComboboxList>
         </ComboboxContent>
       </Combobox>
-      {descriptionVariant === 'inline' && description && (
+      {descriptionVariant === "inline" && description && (
         <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
       <StoreError error={error} />
     </Field>
-  )
+  );
 }
 
-export { StoreFormMultiSelectField, StoreMultiSelectField, type MultiSelectFieldProps }
+export { StoreFormMultiSelectField, StoreMultiSelectField, type MultiSelectFieldProps };

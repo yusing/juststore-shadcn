@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { capitalCase } from 'change-case'
-import { useMemo } from 'react'
-import { Field, FieldDescription } from '@/components/ui/field'
+import { capitalCase } from "change-case";
+import { useMemo } from "react";
+import { Field, FieldDescription } from "@/components/ui/field";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { StoreError } from './Error'
-import { useResolveMultipleChoices } from './hooks'
-import { StoreLabel } from './Label'
+} from "@/components/ui/select";
+import { StoreError } from "./Error";
+import { useResolveMultipleChoices } from "./hooks";
+import { StoreLabel } from "./Label";
 import type {
   DefaultValue,
   FormComponentProps,
@@ -22,21 +22,21 @@ import type {
   Prettify,
   StoreFieldPropsCommon,
   Stringable,
-} from './types'
+} from "./types";
 
 type SelectFieldProps<T extends Stringable, Form = false> = Prettify<
   StoreFieldPropsCommon<T, Form> & {
-    options: Options<T>
+    options: Options<T>;
   } & FormComponentProps<typeof SelectValue> &
     DefaultValue<T> & {
-      capitalizeSelectItems?: boolean
+      capitalizeSelectItems?: boolean;
     }
->
+>;
 
 function StoreFormSelectField<T extends Stringable>(
-  props: FormFieldProps<SelectFieldProps<T, true>>
+  props: FormFieldProps<SelectFieldProps<T, true>>,
 ) {
-  return <StoreSelectField<T, true> {...props} error={props.state.useError} />
+  return <StoreSelectField<T, true> {...props} error={props.state.useError} />;
 }
 
 function StoreSelectField<T extends Stringable, Form = false>({
@@ -44,37 +44,37 @@ function StoreSelectField<T extends Stringable, Form = false>({
   id,
   title,
   description,
-  descriptionVariant = 'inline',
+  descriptionVariant = "inline",
   required = false,
   labelProps,
   error,
   options,
   defaultValue,
-  orientation = 'vertical',
+  orientation = "vertical",
   placeholder,
   capitalizeSelectItems = true,
   className,
   ...props
 }: SelectFieldProps<T, Form>) {
-  const fieldId = useMemo(() => id ?? state.field, [id, state.field])
+  const fieldId = useMemo(() => id ?? state.field, [id, state.field]);
 
-  const [value, setValue] = state.useState()
+  const [value, setValue] = state.useState();
   const { resolvedOptions, stringValue } = useResolveMultipleChoices({
     options,
     value,
     defaultValue,
     capitalizePrimitiveOptions: capitalizeSelectItems,
-  })
+  });
 
   // Base UI resolves the trigger's text from `items`; without it the raw value is shown.
   const items = useMemo(
     () =>
-      resolvedOptions.map(option => ({
+      resolvedOptions.map((option) => ({
         value: option.value == null ? option.value : String(option.value),
         label: optionLabel(option, capitalizeSelectItems),
       })),
-    [resolvedOptions, capitalizeSelectItems]
-  )
+    [resolvedOptions, capitalizeSelectItems],
+  );
 
   return (
     <Field orientation={orientation}>
@@ -94,13 +94,13 @@ function StoreSelectField<T extends Stringable, Form = false>({
         required={Boolean(required)}
         items={items}
         value={stringValue}
-        onValueChange={v => setValue(v as T)}
+        onValueChange={(v) => setValue(v as T)}
       >
         <SelectTrigger id={fieldId} className={className}>
           <SelectValue placeholder={placeholderValue(placeholder, defaultValue)} {...props} />
         </SelectTrigger>
         <SelectContent>
-          {resolvedOptions.map(option => (
+          {resolvedOptions.map((option) => (
             <SelectItem
               key={option.value}
               value={option.value == null ? option.value : String(option.value)}
@@ -111,25 +111,25 @@ function StoreSelectField<T extends Stringable, Form = false>({
           ))}
         </SelectContent>
       </Select>
-      {descriptionVariant === 'inline' && description && (
+      {descriptionVariant === "inline" && description && (
         <FieldDescription className="text-xs">{description}</FieldDescription>
       )}
       <StoreError error={error} />
     </Field>
-  )
+  );
 }
 
 function optionLabel<T extends Stringable>(option: Option<T>, capitalize: boolean) {
-  if (capitalize && (typeof option.label === 'string' || typeof option.label === 'number')) {
-    return capitalCase(String(option.label))
+  if (capitalize && (typeof option.label === "string" || typeof option.label === "number")) {
+    return capitalCase(String(option.label));
   }
-  return option.label
+  return option.label;
 }
 
 function placeholderValue(placeholder: React.ReactNode | undefined, defaultValue: Stringable) {
-  if (placeholder) return placeholder
-  if (defaultValue) return String(defaultValue)
-  return undefined
+  if (placeholder) return placeholder;
+  if (defaultValue) return String(defaultValue);
+  return undefined;
 }
 
-export { StoreFormSelectField, StoreSelectField, type SelectFieldProps }
+export { StoreFormSelectField, StoreSelectField, type SelectFieldProps };
