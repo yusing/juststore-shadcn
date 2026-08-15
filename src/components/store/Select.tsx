@@ -1,6 +1,5 @@
 "use client";
 
-import { capitalCase } from "change-case";
 import { useMemo } from "react";
 import { Field, FieldDescription } from "@/components/ui/field";
 import {
@@ -17,7 +16,6 @@ import type {
   DefaultValue,
   FormComponentProps,
   FormFieldProps,
-  Option,
   Options,
   Prettify,
   StoreFieldPropsCommon,
@@ -59,21 +57,22 @@ function StoreSelectField<T extends Stringable, Form = false>({
   const fieldId = useMemo(() => id ?? state.field, [id, state.field]);
 
   const [value, setValue] = state.useState();
-  const { resolvedOptions, stringValue } = useResolveMultipleChoices({
+  const { resolvedOptions } = useResolveMultipleChoices({
     options,
     value,
     defaultValue,
     capitalizePrimitiveOptions: capitalizeSelectItems,
   });
-
-  // Base UI resolves the trigger's text from `items`; without it the raw value is shown.
-  const items = useMemo(
+  const labelByStringValue = useMemo(
     () =>
-      resolvedOptions.map((option) => ({
-        value: option.value == null ? option.value : String(option.value),
-        label: optionLabel(option, capitalizeSelectItems),
-      })),
-    [resolvedOptions, capitalizeSelectItems],
+      resolvedOptions.reduce(
+        (agg, option) => {
+          agg[option.value != null ? String(option.value) : ""] = option.label;
+          return agg;
+        },
+        {} as Record<string, React.ReactNode>,
+      ),
+    [resolvedOptions],
   );
 
   return (
@@ -92,8 +91,8 @@ function StoreSelectField<T extends Stringable, Form = false>({
       <Select
         name={fieldId}
         required={Boolean(required)}
-        items={items}
-        value={stringValue}
+        items={labelByStringValue}
+        value={value}
         onValueChange={(v) => setValue(v as T)}
       >
         <SelectTrigger id={fieldId} className={className}>
@@ -101,12 +100,9 @@ function StoreSelectField<T extends Stringable, Form = false>({
         </SelectTrigger>
         <SelectContent>
           {resolvedOptions.map((option) => (
-            <SelectItem
-              key={option.value}
-              value={option.value == null ? option.value : String(option.value)}
-            >
+            <SelectItem key={option.value} value={option.value}>
               {option.icon && <option.icon className="size-4" />}
-              <span className="flex-1">{optionLabel(option, capitalizeSelectItems)}</span>
+              {option.label}
             </SelectItem>
           ))}
         </SelectContent>
@@ -119,17 +115,10 @@ function StoreSelectField<T extends Stringable, Form = false>({
   );
 }
 
-function optionLabel<T extends Stringable>(option: Option<T>, capitalize: boolean) {
-  if (capitalize && (typeof option.label === "string" || typeof option.label === "number")) {
-    return capitalCase(String(option.label));
-  }
-  return option.label;
-}
-
 function placeholderValue(placeholder: React.ReactNode | undefined, defaultValue: Stringable) {
   if (placeholder) return placeholder;
-  if (defaultValue) return String(defaultValue);
-  return undefined;
+  if (defaultValue != null) return String(defaultValue);
+  return defaultValue;
 }
 
 export { StoreFormSelectField, StoreSelectField, type SelectFieldProps };

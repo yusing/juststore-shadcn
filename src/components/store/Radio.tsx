@@ -51,7 +51,7 @@ function StoreRadioField<T extends Stringable, Form = false>({
 
   const [value, setValue] = state.useState();
 
-  const { resolvedOptions, stringValue } = useResolveMultipleChoices({
+  const { resolvedOptions } = useResolveMultipleChoices({
     options,
     value,
     defaultValue,
@@ -75,13 +75,13 @@ function StoreRadioField<T extends Stringable, Form = false>({
         {labelPlacement === "left" && label}
         <RadioGroup
           className={cn("flex flex-col", className)}
-          value={stringValue}
+          value={value}
           onValueChange={(v) => setValue(v as T)}
           {...props}
         >
           {resolvedOptions.map((option) => (
             <Field key={option.value} orientation="horizontal">
-              <RadioGroupItem value={String(option.value)} id={`${fieldId}-${option.value}`} />
+              <RadioGroupItem value={option.value} id={`${fieldId}-${option.value}`} />
               <FieldLabel htmlFor={`${fieldId}-${option.value}`} className="font-medium">
                 {option.icon && <option.icon className="size-4" />}
                 {option.label}

@@ -19,12 +19,9 @@ function useIdTitle({
 }
 
 function resolvePrimitiveOption<T extends Stringable>(
-  primitive: T | undefined,
+  primitive: NonNullable<T>,
   capitalizePrimitiveOptions: boolean,
 ): Option<T> {
-  if (primitive == null) {
-    return { label: "None", value: primitive, icon: undefined };
-  }
   const label = capitalizePrimitiveOptions ? capitalCase(String(primitive)) : String(primitive);
   return { label, value: primitive, icon: undefined };
 }
@@ -44,9 +41,11 @@ function useResolveMultipleChoices<T extends Stringable>({
   const resolvedOptions: Readonly<Option<T>[]> = useMemo(
     () =>
       options.map((option) =>
-        typeof option === "object"
-          ? option
-          : resolvePrimitiveOption(option, capitalizePrimitiveOptions),
+        option == null
+          ? { label: "None", value: option, icon: undefined }
+          : typeof option === "object"
+            ? option
+            : resolvePrimitiveOption(option, capitalizePrimitiveOptions),
       ),
     [options, capitalizePrimitiveOptions],
   );
