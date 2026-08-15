@@ -88,12 +88,15 @@ function StoreSelectField<T extends Stringable, Form = false>({
       />
       {/* `name` keeps Base UI's hidden validation input positioned in place, so a `required`
           violation anchors its bubble to the trigger instead of the viewport corner. */}
+      {/* Base UI normalize no value as null,
+          so we have to cast it back to undefined.
+        */}
       <Select
         name={fieldId}
         required={Boolean(required)}
         items={labelByStringValue}
         value={value}
-        onValueChange={(v) => setValue(v as T)}
+        onValueChange={(v) => setValue((v == null ? undefined : v) as T)}
       >
         <SelectTrigger id={fieldId} className={className}>
           <SelectValue placeholder={placeholderValue(placeholder, defaultValue)} {...props} />
